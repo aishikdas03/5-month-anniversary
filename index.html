@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 5 Months 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #f7b8c4;
+      --rose: #e8637f;
+      --deep: #b5304f;
+      --cream: #fff8f0;
+      --warm: #f9e4d4;
+      --text: #4a1a28;
+    }
+
+    body {
+      background: var(--cream);
+      font-family: 'Lora', serif;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ctext y='16' font-size='16'%3E💕%3C/text%3E%3C/svg%3E") 10 10, auto;
+    }
+
+    /* Floating hearts bg */
+    .hearts-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      bottom: -40px;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(-10deg); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+    }
+
+    /* Envelope intro */
+    #envelope-screen {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #fde8ef 0%, #ffd6e7 50%, #ffb3cb 100%);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    #envelope-screen.gone {
+      opacity: 0; pointer-events: none; transform: scale(1.05);
+    }
+    .envelope-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      animation: bounceIn 0.8s cubic-bezier(.36,.07,.19,.97);
+    }
+    @keyframes bounceIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      70%  { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .envelope {
+      width: 160px; height: 110px; position: relative; cursor: pointer;
+      filter: drop-shadow(0 8px 24px rgba(180,50,80,.25));
+      transition: transform 0.2s;
+    }
+    .envelope:hover { transform: scale(1.07) rotate(-2deg); }
+    .env-body {
+      width: 100%; height: 100%;
+      background: #fff0f5;
+      border-radius: 6px;
+      border: 2px solid #f7b8c4;
+      position: relative;
+      overflow: hidden;
+    }
+    .env-body::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+      background: linear-gradient(to top, #fce4ec, #fff0f5);
+    }
+    .env-flap {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 55px;
+      background: #f9c6d5;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-radius: 4px 4px 0 0;
+      transition: clip-path 0.4s;
+    }
+    .envelope:hover .env-flap {
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+    }
+    .env-heart {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      font-size: 1.4rem; z-index: 2;
+    }
+    .env-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem; color: var(--deep);
+      position: absolute; bottom: 14px; width: 100%; text-align: center;
+    }
+    .open-hint {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem; color: var(--deep);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.97)} }
+    .for-her { font-family: 'Dancing Script', cursive; font-size: 1.1rem; color: var(--rose); }
+
+    /* Main content */
+    #main {
+      position: relative; z-index: 1;
+      max-width: 680px; margin: 0 auto;
+      padding: 60px 24px 80px;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.9s 0.2s, transform 0.9s 0.2s;
+    }
+    #main.visible { opacity: 1; transform: translateY(0); }
+
+    .badge {
+      text-align: center; margin-bottom: 10px;
+      font-size: 2.8rem;
+      animation: spinBounce 2.5s ease-in-out infinite;
+    }
+    @keyframes spinBounce {
+      0%,100%{transform:rotate(-8deg) scale(1)}
+      50%{transform:rotate(8deg) scale(1.1)}
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      text-align: center;
+      color: var(--deep);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.15rem;
+      color: var(--rose);
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 28px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--pink));
+    }
+    .divider::after { background: linear-gradient(to left, transparent, var(--pink)); }
+    .divider span { font-size: 1.1rem; }
+
+    .letter-card {
+      background: white;
+      border: 1.5px solid var(--pink);
+      border-radius: 18px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 32px rgba(232,99,127,.09), 0 1px 4px rgba(232,99,127,.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .letter-card::before {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, #ffd6e7 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .letter-text {
+      font-size: 1.04rem;
+      line-height: 1.9;
+      color: #5a2535;
+      font-style: italic;
+    }
+    .letter-text p { margin-bottom: 18px; }
+    .letter-text .highlight {
+      font-style: normal;
+      color: var(--deep);
+      font-weight: 600;
+      background: linear-gradient(to bottom, transparent 65%, #ffd6e7 65%);
+      padding: 0 2px;
+    }
+    .sign-off {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--deep);
+      text-align: right;
+      margin-top: 24px;
+    }
+
+    /* Counter */
+    .counter-wrap {
+      margin: 36px 0;
+      background: linear-gradient(135deg, #fff0f5, #fce4ec);
+      border: 1.5px solid var(--pink);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    .counter-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem; color: var(--rose); margin-bottom: 12px;
+    }
+    .counter-nums {
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    }
+    .counter-box {
+      background: white;
+      border: 1.5px solid var(--pink);
+      border-radius: 12px;
+      padding: 12px 18px;
+      min-width: 70px;
+    }
+    .counter-box .num {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem; color: var(--deep); line-height: 1;
+    }
+    .counter-box .lbl {
+      font-size: 0.68rem; color: var(--rose); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px;
+    }
+
+    /* Polaroids */
+    .memories-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem; color: var(--deep);
+      text-align: center; margin-bottom: 18px;
+    }
+    .polaroids {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 36px;
+    }
+    .polaroid {
+      background: white;
+      border: 1px solid #f0d0da;
+      border-radius: 4px;
+      padding: 12px 12px 32px;
+      box-shadow: 2px 4px 16px rgba(180,50,80,.13);
+      width: 130px;
+      transform: rotate(var(--r));
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.08);
+      box-shadow: 4px 8px 28px rgba(180,50,80,.22);
+      z-index: 10;
+    }
+    .polaroid .photo {
+      width: 100%; aspect-ratio: 1;
+      background: var(--warm);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+    }
+    .polaroid .caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.82rem; color: var(--rose);
+      text-align: center; margin-top: 8px;
+      line-height: 1.3;
+    }
+
+    /* Wish button */
+    .wish-section { text-align: center; margin: 10px 0 0; }
+    .wish-btn {
+      background: linear-gradient(135deg, var(--rose), var(--deep));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 36px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(181,48,79,.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wish-btn:hover { transform: scale(1.06); box-shadow: 0 6px 28px rgba(181,48,79,.4); }
+    .wish-btn:active { transform: scale(0.97); }
+
+    /* Confetti burst on click */
+    .confetti-piece {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 1.2rem;
+      animation: confettiFall 1.4s ease-out forwards;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) rotate(720deg) scale(0.3); opacity: 0; }
+    }
+
+    .footer-hearts { text-align: center; margin-top: 40px; font-size: 1.5rem; letter-spacing: 6px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+<!-- Floating hearts bg -->
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- Envelope intro screen -->
+<div id="envelope-screen">
+  <div class="envelope-wrap">
+    <div class="for-her">✨ something for you ✨</div>
+    <div class="envelope" onclick="openEnvelope()">
+      <div class="env-body">
+        <div class="env-flap"></div>
+        <div class="env-heart">💌</div>
+        <div class="env-label">for my puchu sona 🥰</div>
+      </div>
+    </div>
+    <div class="open-hint">click to open 💕</div>
+  </div>
+</div>
+
+<!-- Main letter -->
+<div id="main">
+  <div class="badge">🎀</div>
+  <h1>Happy 5 Months,<br/>Puchu Sona! 💕</h1>
+  <p class="subtitle">5 months of you. 5 months of us. 🥰</p>
+
+  <div class="divider"><span>💗</span></div>
+
+  <div class="counter-wrap">
+    <div class="counter-label">We've been us for...</div>
+    <div class="counter-nums" id="counter"></div>
+  </div>
+
+  <div class="letter-card">
+    <div class="letter-text">
+      <p>Bhai sahab… it's been <span class="highlight">5 whole months</span> and honestly — how??
+      Time really does fly when you're enjoying every single second of it. 😋❤️</p>
+
+      <p>These 5 months have been <span class="highlight">truly the greatest</span>. I did so many things I never would have done before — all because I knew you were there. Someone I could talk to, open up to, at every single moment. Be it during our friendship or now. ❤️❤️</p>
+
+      <p>I still don't understand how someone can be <span class="highlight">this good</span>. Uffff bhai, I am so damn lucky to have you in my life. You are literally my everything. You are the person I wanted the most — and you filled the only gap that was left, the one that when filled, made my life feel <span class="highlight">complete</span>. 💕💕</p>
+
+      <p>I need nothing. <em>Kuch nhi chaiye</em> — bas tum aur main. Those little smiles of yours, those jokes, those dances… and what not. Bhai, I am <span class="highlight">truly in love with you</span>.</p>
+
+      <p>This month was so busy for both of us, but we still managed to give each other time. Thank you so much re, for everything. For being you. For choosing me. 💋🥰😋😝</p>
+
+      <div class="sign-off">— yours, always 💕</div>
+    </div>
+  </div>
+
+  <div class="divider"><span>🌸</span></div>
+
+  <div class="memories-title">little moments 🎞️</div>
+  <div class="polaroids">
+    <div class="polaroid" style="--r: -5deg">
+      <div class="photo">😂</div>
+      <div class="caption">our stupid jokes</div>
+    </div>
+    <div class="polaroid" style="--r: 3deg">
+      <div class="photo">💬</div>
+      <div class="caption">late night talks</div>
+    </div>
+    <div class="polaroid" style="--r: -3deg">
+      <div class="photo">💃</div>
+      <div class="caption">those dances</div>
+    </div>
+    <div class="polaroid" style="--r: 6deg">
+      <div class="photo">🥺</div>
+      <div class="caption">every little smile</div>
+    </div>
+    <div class="polaroid" style="--r: -4deg">
+      <div class="photo">❤️</div>
+      <div class="caption">us ✨</div>
+    </div>
+  </div>
+
+  <div class="wish-section">
+    <button class="wish-btn" onclick="sendLove()">send her love 💌</button>
+  </div>
+
+  <div class="footer-hearts">💕 💗 💓 💕</div>
+</div>
+
+<script>
+  // Floating hearts
+  const emojis = ['💕','💗','💓','🌸','✨','💌','🥰','❤️','🎀','💞'];
+  const bg = document.getElementById('heartsBg');
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-float';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+    h.style.animationDuration = (8 + Math.random() * 14) + 's';
+    h.style.animationDelay = (Math.random() * 12) + 's';
+    bg.appendChild(h);
+  }
+
+  // Envelope open
+  function openEnvelope() {
+    document.getElementById('envelope-screen').classList.add('gone');
+    setTimeout(() => {
+      document.getElementById('main').classList.add('visible');
+    }, 300);
+  }
+
+  // Counter
+  function updateCounter() {
+    // IST = UTC+5:30, offset in ms = 5.5 * 3600000
+    const IST_OFFSET = 5.5 * 3600 * 1000;
+    const start = new Date('2026-01-01T00:00:00+05:30'); // midnight IST
+    const now = new Date();
+    const diff = now - start;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    const el = document.getElementById('counter');
+    el.innerHTML = `
+      <div class="counter-box"><div class="num">${Math.floor(days/30)}</div><div class="lbl">Months</div></div>
+      <div class="counter-box"><div class="num">${days % 30}</div><div class="lbl">Days</div></div>
+      <div class="counter-box"><div class="num">${hours}</div><div class="lbl">Hours</div></div>
+      <div class="counter-box"><div class="num">${mins}</div><div class="lbl">Mins</div></div>
+      <div class="counter-box"><div class="num">${secs}</div><div class="lbl">Secs</div></div>
+    `;
+  }
+  updateCounter();
+  setInterval(updateCounter, 1000);
+
+  // Love burst
+  function sendLove() {
+    const pieces = ['💕','💗','🌸','✨','💌','🥰','💞','🎀','❤️','😝'];
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 120 + Math.random() * 200;
+      p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      p.style.left = (Math.random() * 80 + 10) + 'vw';
+      p.style.top = (Math.random() * 60 + 20) + 'vh';
+      p.style.animationDelay = (Math.random() * 0.4) + 's';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 2000);
+    }
+  }
+</script>
+</body>
+</html>
